@@ -1,0 +1,85 @@
+Etape obligatorii de dezvoltare (Commit-uri)
+
+1. Inițializare proiect Express
+
+Configurarea structurii de bază a aplicației Express.
+
+Implementarea middleware-urilor esențiale.
+
+Configurarea variabilelor de mediu și a sistemului de logging.
+
+
+2. Inițializare proiect Vue
+
+Configurarea proiectului Vue 3 cu Composition API sau abordarea implicită.
+
+Configurarea router-ului și a gestionării stării cu Vuex.
+
+Crearea structurii de bază a componentelor.
+
+
+3. Configurare și conectare Firestore
+
+Inițializarea Firebase în proiect.
+
+Configurarea regulilor de securitate în Firestore.
+
+Implementarea serviciului de conexiune la baza de date.
+
+
+4. Implementare rute și componente principale 
+
+Definirea rutelor API în Express.
+
+Crearea componentelor Vue reutilizabile.
+
+Implementarea unui layout responsive.
+
+
+5. 
+Script generare date
+
+
+6. Implementare autentificare
+
+Integrarea Firebase Authentication, JWT, session sau similar.
+
+Implementarea middleware-ului de autentificare în API.
+
+Crearea componentelor UI pentru autentificare.
+
+
+7. Operații CRUD backend + DB
+
+Implementarea controllerelor pentru fiecare entitate.
+
+Validarea datelor înainte de salvare.
+
+Gestionarea erorilor și codurilor de răspuns HTTP.
+
+
+8. Operații CRUD frontend
+
+Crearea formularelor pentru operațiile Create și Update.
+
+Implementarea componentelor pentru listare și ștergere.
+
+Gestionarea stării aplicației cu Vuex.
+
+
+9. Implementare validări date
+
+Validări pe partea de client (frontend).
+
+Validări pe partea de server (backend).
+
+Feedback vizual către utilizator în cazul erorilor (opțional)
+
+
+10. Finalizare și optimizări (opțional)
+
+Optimizări de performanță.
+
+Testare end-to-end.
+
+Scrierea documentației și a instrucțiunilor de utilizare.
