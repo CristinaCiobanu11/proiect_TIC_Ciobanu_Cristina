@@ -1,17 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../db/database');
+const dbInstance = require('../db/database');
 
 
 // Funcții pentru colecția SPORTS (serviciu integrat)
 const SportsService = {
   async addSport(sport) {
-    const docRef = await db.collection('sports').add(sport);
+    const docRef = await dbInstance.collection('sports').add(sport);
     return docRef.id;
   },
 
   async getSports() {
-    const snapshot = await db.collection('sports').get();
+    const snapshot = await dbInstance.collection('sports').get();
     const sports = [];
     snapshot.forEach((doc) => {
       sports.push({ id: doc.id, ...doc.data() });
@@ -20,7 +20,7 @@ const SportsService = {
   },
 
   async getSportById(id) {
-    const doc = await db.collection('sports').doc(id).get();
+    const doc = await dbInstance.collection('sports').doc(id).get();
     if (!doc.exists) {
       throw new Error('Sport not found');
     }
@@ -29,11 +29,11 @@ const SportsService = {
   },
 
   async updateSport(id, sport) {
-    await db.collection('sports').doc(id).update(sport);
+    await dbInstance.collection('sports').doc(id).update(sport);
   },
 
   async deleteSport(id) {
-    await db.collection('sports').doc(id).delete();
+    await dbInstance.collection('sports').doc(id).delete();
   },
 };
 
