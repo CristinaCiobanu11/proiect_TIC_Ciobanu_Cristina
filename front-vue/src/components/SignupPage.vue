@@ -1,26 +1,19 @@
 <template>
-    <div>
-      <h1>Users Page</h1>
-      <!-- Adaugă conținut aici -->
+    <div class="signup">
+      <h1>This is a signup page</h1>
     </div>
   </template>
   
-  <script>
-  export default {
-    name: "UsersPage",
-  };
-  </script>
-  
-
   <style scoped>
-  
-  
-  h1 {
+  .signup {
     display: flex;
     justify-content: center; /* Centrează pe orizontală */
     align-items: center;     /* Centrează pe verticală */
     height: 100vh;           /* Setează înălțimea containerului la 100% din înălțimea vizibilă a paginii */
-    margin: 0;
+    margin: 0;               /* Îndepărtează marginile implicite ale paginii */
+  }
+  
+  h1 {
     margin-top: 20px; /* Adaugă un spațiu în partea de sus, pentru a nu fi lipit de marginea paginii */
     font-size: 2rem;  /* Ajustează mărimea fontului dacă este necesar */
   }
