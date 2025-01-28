@@ -9,7 +9,7 @@
       <!-- Spacer pentru separare -->
       <v-spacer></v-spacer>
       <!-- Buton Logout în dreapta -->
-      <v-btn text class="logout-btn">Logout</v-btn>
+      <v-btn text to="/login" class="logout-btn">Logout</v-btn>
     </v-toolbar>
 
     <!-- Conținut principal -->
