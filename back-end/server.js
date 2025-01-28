@@ -11,6 +11,7 @@ app.use(express.json());
 const sportsRoutes = require('./routes/sportsRoutes');
 const studentsRoutes = require('./routes/studentsRoutes');
 const usersRoutes = require('./routes/usersRoutes');
+const generateFakerData = require('./fakerGenerate');
 
 app.use('/sports', sportsRoutes);
 app.use('/students', studentsRoutes);
@@ -18,5 +19,6 @@ app.use('/users', usersRoutes);
 
 // Pornirea serverului
 app.listen(PORT, () => {
+    //generateFakerData();
     console.log(`Server running on port ${PORT}`);
 });

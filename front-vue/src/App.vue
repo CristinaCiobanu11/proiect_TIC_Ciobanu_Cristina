@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <!-- Toolbar roz, întins pe toată lățimea -->
-    <v-toolbar app class="custom-toolbar">
+    <v-toolbar v-if="showToolbar" app class="custom-toolbar">
       <!-- Butoane pentru navigare în stânga -->
       <v-btn text to="/about"  class="custom-btn">About</v-btn>
       <v-btn text to="/sports" class="custom-btn">Sports</v-btn>
@@ -14,7 +14,7 @@
 
     <!-- Conținut principal -->
     <v-main class="main-background">
-      <router-view />
+      <router-view :key="$route.path"/>
     </v-main>
   </v-app>
 </template>
@@ -22,6 +22,13 @@
 <script>
 export default {
   name: "App",
+  computed: {
+    showToolbar() {
+      // Toolbar-ul este ascuns pe rutele "/login" și "/signup"
+      const hiddenRoutes = ["/login", "/signup"];
+      return !hiddenRoutes.includes(this.$route.path);
+    },
+  },
 };
 </script>
 

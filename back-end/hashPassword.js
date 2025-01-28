@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 
 async function generateHash() {
-  const password = 'blabla'; // Parola pe care vrei să o hash-uiești
+  const password = 'pilatessss'; // Parola pe care vrei să o hash-uiești
   const saltRounds = 10; // Numărul de iterații (cost factor)
 
   try {

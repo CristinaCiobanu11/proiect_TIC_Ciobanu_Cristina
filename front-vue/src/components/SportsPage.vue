@@ -1,11 +1,8 @@
 <template>
   <v-container class="fill-height">
-    <v-row
-      align="center"
-      justify="center"
-    >
+    <v-row align="center" justify="center">
       <v-col cols="12">
-        <h1 class="text-center mb-4">Sports</h1>
+        <h1 class="text-center header-title mb-4">Sports</h1>
       </v-col>
       <v-col
         v-for="sport in sports"
@@ -78,3 +75,14 @@ export default {
   },
 };
 </script>
+
+
+<style scoped>
+/* Stil pentru header */
+.header-title {
+  margin-top: 40px; /* Spațiu sub toolbar */
+  font-size: 32px;
+  font-weight: bold;
+  color:black;
+}
+</style>
