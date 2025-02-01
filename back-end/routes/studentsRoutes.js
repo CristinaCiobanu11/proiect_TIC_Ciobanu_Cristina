@@ -24,7 +24,13 @@ const StudentsService = {
       throw new Error('Student not found');
     }
     const studentData = doc.data();
-    return { id: doc.id, ...studentData, enrollmentDate: studentData?.enrollmentDate?.toDate() };
+    return { 
+      // id: doc.id, 
+      ...studentData, 
+      enrollmentDate: studentData.enrollmentDate instanceof Date 
+    ? studentData.enrollmentDate.toISOString() 
+    : studentData.enrollmentDate  
+    };
   },
 
   async updateStudent(id, student) {
@@ -63,7 +69,9 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const student = req.body;
-    student.enrollmentDate = new Date(student.enrollmentDate); // Conversie la Date
+    if (typeof student.enrollmentDate === "string") {
+      student.enrollmentDate = new Date(student.enrollmentDate);
+    }
     const newStudent = await StudentsService.addStudent(student);
     res.status(201).send(newStudent);
   } catch (error) {

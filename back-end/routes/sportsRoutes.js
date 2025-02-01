@@ -14,7 +14,7 @@ const SportsService = {
     const snapshot = await db.collection('sports').get();
     const sports = [];
     snapshot.forEach((doc) => {
-      sports.push({ id: doc.id, ...doc.data() });
+      sports.push({ ...doc.data(), id: doc.id});
     });
     return sports;
   },
@@ -53,9 +53,9 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     const sports = await SportsService.getSports();
-    res.status(200).send(sports);
+    res.status(200).json(sports);
   } catch (error) {
-    res.status(500).send({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 });
 

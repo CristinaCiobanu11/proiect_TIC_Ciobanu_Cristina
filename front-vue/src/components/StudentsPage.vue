@@ -1,9 +1,20 @@
 <template>
   <v-container class="fill-height">
-    <v-row align="center" justify="center" dense>
-      <v-col cols="12">
-        <h1 class="text-center header-title mb-4">Students</h1>
+    <v-row align="center" justify="space-between">
+      <v-col cols="12" class="d-flex justify-between align-center">
+        <h1 class="text-center header-title">Students</h1>
+        <v-btn
+          color="black"
+          class="add-student-btn"
+          @click="navigateToAdd"
+          large
+        >
+          Add Student
+        </v-btn>
       </v-col>
+    </v-row>
+
+    <v-row align="center" justify="center">
       <v-col
         v-for="student in students"
         :key="student.id"
@@ -34,11 +45,28 @@
           <v-card-item class="text-center">
             <p><strong>Enrollment Date:</strong> {{ formatTimestamp(student.enrollmentDate) || 'Unknown date' }}</p>
           </v-card-item>
+
+           <!-- Butoane Edit și Delete -->
+           <v-card-actions class="d-flex justify-end">
+            <v-btn
+              color="black"
+              text
+              @click="navigateToEdit(student.id)"
+            >
+              Edit
+            </v-btn>
+            <v-btn
+              color="error"
+              text
+              @click="deleteStudent(student.id)"
+            >
+              Delete
+            </v-btn>
+          </v-card-actions>
+
         </v-card>
       </v-col>
     </v-row>
-
-  
   </v-container>
 </template>
 
@@ -63,6 +91,25 @@ export default {
         console.error('Error fetching students:', error);
       }
     },
+
+    navigateToEdit(studentId) {
+      this.$router.push(`/students/edit/${studentId}`);
+    },
+
+    navigateToAdd() {
+      this.$router.push("/students/add");
+    },
+
+    async deleteStudent(studentId) {
+      try {
+        await axios.delete(`http://localhost:3000/students/${studentId}`);
+        // Elimină sportul șters din lista locală
+        this.students = this.students.filter((student) => student.id !== studentId);
+      } catch (error) {
+        console.error("Error deleting student:", error);
+      }
+    },
+
     selectStudent(student) {
       this.selectedStudent = student;
       this.dialog = true;
@@ -83,9 +130,19 @@ export default {
 <style scoped>
 /* Stil pentru header */
 .header-title {
-  margin-top: 40px; /* Spațiu sub toolbar */
+  margin-top: 45px;
+  margin-left: 540px;
   font-size: 32px;
   font-weight: bold;
-  color:black;
+  color: black;
+}
+
+/* Stil pentru butonul "Add Sport" */
+.add-student-btn {
+  margin-top: 45px;
+  font-size: 16px;
+  font-weight: bold;
+  margin-right: 5px;
+  margin-left: 540px;
 }
 </style>

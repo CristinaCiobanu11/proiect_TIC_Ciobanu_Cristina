@@ -49,8 +49,7 @@ async function generateFakerData() {
     };
   
     return {
-      ...student,
-      enrollmentDate: student.enrollmentDate.toISOString(), // Convertim în format ISO
+      ...student // Convertim în format ISO
     };
   }
 
@@ -67,8 +66,7 @@ async function generateFakerData() {
     };
   
     return {
-      ...sport,
-      addedOn: sport.addedOn.toISOString(), // Convertim în format ISO
+      ...sport
     };
   }
 
