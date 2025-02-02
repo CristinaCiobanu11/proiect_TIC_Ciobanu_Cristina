@@ -97,7 +97,7 @@ export default {
         sportName: this.sport.sportName,
         teamName: this.sport.teamName,
         sportBudget: Number(this.sport.sportBudget), // Convertire la număr
-        addedOn: new Date(this.sport.addedOn).toISOString(), // Format corect pentru Firestore
+        addedOn: new Date(this.sport.addedOn), // Format corect pentru Firestore
         students: this.selectedStudents // Lista de studenți selectați
       };
 
@@ -136,7 +136,7 @@ export default {
         sportName: "",
         teamName: "",
         sportBudget: null,
-        addedOn: new Date().toISOString().split("T")[0],
+        addedOn: new Date(),
         students: []
       };
       this.selectedStudents = [];

@@ -131,7 +131,7 @@ export default {
 /* Stil pentru header */
 .header-title {
   margin-top: 45px;
-  margin-left: 540px;
+  margin-left: 520px;
   font-size: 32px;
   font-weight: bold;
   color: black;

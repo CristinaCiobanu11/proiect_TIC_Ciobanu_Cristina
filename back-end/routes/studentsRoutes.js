@@ -27,9 +27,7 @@ const StudentsService = {
     return { 
       // id: doc.id, 
       ...studentData, 
-      enrollmentDate: studentData.enrollmentDate instanceof Date 
-    ? studentData.enrollmentDate.toISOString() 
-    : studentData.enrollmentDate  
+      enrollmentDate: studentData?.enrollmentDate?.toDate() 
     };
   },
 
@@ -69,9 +67,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const student = req.body;
-    if (typeof student.enrollmentDate === "string") {
-      student.enrollmentDate = new Date(student.enrollmentDate);
-    }
+    student.enrollmentDate = new Date(student.enrollmentDate);
     const newStudent = await StudentsService.addStudent(student);
     res.status(201).send(newStudent);
   } catch (error) {

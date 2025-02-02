@@ -65,16 +65,16 @@ export default {
   },
   methods: {
     
-    // Adăugare sport nou
+    // Adăugare student nou
     async addStudent() {
       if (!this.validateForm()) return; // Validare înainte de a trimite cererea
 
-      // Pregătirea obiectului de sport pentru backend
+      // Pregătirea obiectului de student pentru backend
       const newStudent = {
         studentName: this.student.studentName,
         studentEmail: this.student.studentEmail,
         studentPhoneNumber: this.student.studentPhoneNumber,
-        enrollmentDate: new Date(this.student.enrollmentDate).toISOString(), // Format corect pentru Firestore
+        enrollmentDate: new Date(this.student.enrollmentDate),
         major: this.student.major // Lista de studenți selectați
       };
 
@@ -113,7 +113,7 @@ export default {
         studentName: "",
         studentEmail: "",
         phoneNumber: "",
-        enrollmentDate: new Date().toISOString().split("T")[0],
+        enrollmentDate: new Date(),
         major: ""
       };
     }

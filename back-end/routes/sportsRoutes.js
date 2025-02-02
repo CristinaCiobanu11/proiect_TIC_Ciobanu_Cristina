@@ -3,11 +3,11 @@ const router = express.Router();
 const db = require('../db/database');
 
 
-// Funcții pentru colecția SPORTS (serviciu integrat)
+// Funcții pentru colecția SPORTS
 const SportsService = {
   async addSport(sport) {
     const docRef = await db.collection('sports').add(sport);
-    return docRef.id;
+    return {id: docRef.id};
   },
 
   async getSports() {
@@ -25,7 +25,10 @@ const SportsService = {
       throw new Error('Sport not found');
     }
     const sportData = doc.data();
-    return { id: doc.id, ...sportData, startDate: sportData?.startDate?.toDate() };
+    return { 
+      //id: doc.id, 
+      ...sportData, 
+      addedOn: sportData?.addedOn?.toDate() };
   },
 
   async updateSport(id, sport) {
@@ -41,13 +44,16 @@ const SportsService = {
 
 // Adaugă un sport
 router.post('/', async (req, res) => {
-  try {
-    const sportId = await SportsService.addSport(req.body);
-    res.status(201).send({ id: sportId });
+  try{
+    const sport=req.body;
+    sport.addedOn = new Date(sport.addedOn);
+    const newSport=await SportsService.addSport(sport);
+    res.status(201).send(newSport);
   } catch (error) {
     res.status(500).send({ message: error.message });
   }
-});
+  }
+);
 
 // Obține lista de sporturi
 router.get('/', async (req, res) => {
@@ -75,6 +81,7 @@ router.put('/:id', async (req, res) => {
   try {
     const sportId = req.params.id;
     const sport = req.body;
+    sport.addedOn=new Date(sport.addedOn); // Conversie pentru a adauga Timestamp in Firestore, nu String
     await SportsService.updateSport(sportId, sport);
     res.status(200).send({ message: 'Sport updated successfully' });
   } catch (error) {
