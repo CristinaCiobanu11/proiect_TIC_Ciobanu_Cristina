@@ -139,24 +139,46 @@ export default {
       return true;
     }
   },
+  
   created() {
     this.fetchStudents();
   },
+
+
   mounted() {
-        if (this.sportId) {
-            axios.get(`http://localhost:3000/sports/${this.sportId}`)
-                .then(response => {
-                    this.sport = {
-                        ...response.data,
-                        addedOn: this.convertFirestoreDateToVuetifyDate(response.data.addedOn),
-                        students: response.data.students
-                    };
-                    this.selectedStudents = this.sport.students;
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-        }
-      }
+    if (this.sportId) {
+        axios.get(`http://localhost:3000/sports/${this.sportId}`)
+            .then(response => {
+                const sportData = response.data;
+
+                // Obține lista curentă de studenți din baza de date
+                axios.get("http://localhost:3000/students")
+                    .then(studentResponse => {
+                        const validStudents = studentResponse.data.map(student => student.id);
+
+                        // Filtrăm doar studenții care există în baza de date
+                        const filteredStudents = sportData.students.filter(studentId => validStudents.includes(studentId));
+
+                        this.sport = {
+                            ...sportData,
+                            addedOn: this.convertFirestoreDateToVuetifyDate(sportData.addedOn),
+                            students: filteredStudents
+                        };
+
+                        this.selectedStudents = this.sport.students;
+                    })
+                    .catch(error => {
+                        console.error("Error fetching students:", error);
+                    });
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+}
+
+
+
+
 };
 </script>
