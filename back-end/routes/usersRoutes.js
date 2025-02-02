@@ -1,6 +1,7 @@
 const express = require('express');
 const db = require('../db/database');
 const router = express.Router();
+const bcrypt = require('bcrypt');
 
 
 // Ruta POST pentru login
@@ -26,11 +27,11 @@ router.post('/login', async (req, res) => {
     const userData = userDoc.data();
 
     // Compară parola cu hash-ul stocat
-    //const isPasswordValid = await bcrypt.compare(password, userData.password);
+    const isPasswordValid = await bcrypt.compare(password, userData.password);
 
-    if(password===userData.password){
-    isPasswordValid=true;
-    }else isPasswordValid=false;
+    // if(password===userData.password){
+    // isPasswordValid=true;
+    // }else isPasswordValid=false;
     
 
     if (!isPasswordValid) {
@@ -76,18 +77,21 @@ router.post('/signup', async (req, res) => {
       return res.status(401).json({ success: false, message: 'User with this email already exists in the database.' });
     }
 
+    const saltRounds = 2;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
    
     await db.collection('users').add({
       name: name,
       email: email,
-      password: password
+      password: hashedPassword 
+      
     });
 
     // Login reușit
     return res.status(201).json({ success: true, message: 'User created successfully.' });
   } catch (error) {
     console.error('Error during signup:', error);
-    return res.status(500).json({ success: false, message: 'An error occurred during login.' });
+    return res.status(500).json({ success: false, message: 'An error occurred during signup.' });
   }
 
 });
