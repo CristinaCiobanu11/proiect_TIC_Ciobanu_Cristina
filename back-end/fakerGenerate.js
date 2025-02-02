@@ -49,7 +49,7 @@ async function generateFakerData() {
     };
   
     return {
-      ...student // Convertim în format ISO
+      ...student
     };
   }
 

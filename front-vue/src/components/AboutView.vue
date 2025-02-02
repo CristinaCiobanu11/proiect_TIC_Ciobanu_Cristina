@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <h1>This is a sports-students management web application</h1>
+    <h1>This is a sports-students catalogue management web application</h1>
   </div>
 </template>
 

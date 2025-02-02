@@ -2,9 +2,6 @@ const express = require('express');
 const db = require('../db/database');
 const router = express.Router();
 
-//login
-//signup
-
 
 // Ruta POST pentru login
 router.post('/login', async (req, res) => {
@@ -53,9 +50,7 @@ router.post('/login', async (req, res) => {
 
 
 
-
-
-// Ruta POST pentru login
+// Ruta POST pentru signup
 router.post('/signup', async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -96,12 +91,6 @@ router.post('/signup', async (req, res) => {
   }
 
 });
-
-
-
-
-
-
 
 
 
